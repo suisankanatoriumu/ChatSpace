@@ -1,34 +1,20 @@
 .side-bar
   .header
     %h3.header__name
-
       = current_user.name
-
     %ul.header__lists
       %li.list
-        = link_to '#' do
+        = link_to new_group_path do
           = icon('fa', 'edit',class: 'icon')
       %li.list
-
         = link_to edit_user_path(current_user) do
           = icon('fa', 'cog',class: 'icon')
-          -# = fa_icon 'cog', class: 'icon' だと、古い記述でうまく表示されない
 
   .groups
-    .group
-      .group__name
-        グループ名
-      .group__message
-        新着メッセージ
-    .group
-      .group__name
-        グループ名
-      .group__message
-        新着メッセージ
-    .group
-      .group__name
-        グループ名
-      .group__message
-
-        新着メッセージ
-
+    - current_user.groups.each do |group|
+      .group
+        = link_to group_messages_path(group) do
+          .group__name
+            = group.name
+          .group__message
+            メッセージはまだありません。
