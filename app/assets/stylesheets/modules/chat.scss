@@ -22,17 +22,18 @@
         }
       }
     }
-    .right-header {
-      border: 1px solid $light_blue;
-      color: $light_blue;
-      float: right;
-      height: 40px;
-      line-height: 40px;
-      margin-top: 28px;
-      padding: 0 20px;
+    .button {
+        border: 1px solid $light_blue;
+        color: $light_blue;
+        float: right;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 28px;
+        padding: 0 20px;
+        display: block;
+      }
     }
-  }
-
+  
   .messages {
     background-color: #FAFAFA;
     box-sizing: border-box;
