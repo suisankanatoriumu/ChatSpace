@@ -1,4 +1,5 @@
 .chat {
+  height: 100vh;
   width: calc(100% - 300px);
   .header {
     box-sizing: border-box;
@@ -35,6 +36,7 @@
     }
   
   .messages {
+    overflow: scroll;
     background-color: #FAFAFA;
     box-sizing: border-box;
     padding: 46px 40px 0;
