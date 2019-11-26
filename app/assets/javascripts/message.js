@@ -26,7 +26,7 @@ $(function(){
     return html;
   }
 
-  function reload() {
+  function reloadMessages() {
     if (window.location.href.match(/\/groups\/\d+\/messages/)) {
       $.ajax({
         url: location.href,
@@ -35,7 +35,7 @@ $(function(){
       })
 
       .done(function(new_messages){
-
+        console.log(new_messages)
         // 画面初期表示時のみ実行
         if (latest_id == 0) {
           latest_id = $('.message').last().data('messageId');
@@ -53,11 +53,11 @@ $(function(){
       $('.messages').append(chatHTML);
       })
       .fail(function(new_messages){
-        alert('メッセージ取得に失敗しました');
+        console.log('メッセージ取得に失敗しました');
       });
     }
     else {
-      clearInterval(intarval);
+      clearInterval(interval);
     }
   }
   

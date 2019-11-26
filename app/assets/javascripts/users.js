@@ -19,11 +19,15 @@ $(function() {
   }
   function addDeleteUser(name, id) {
     let html = `
-    <div class="ChatMember clearfix" id="${id}">
-      <p class="ChatMember__name">${name}</p>
-      <div class="ChatMember__remove ChatMember__button" data-user-id="${id}" data-user-name="${name}">削除</div>
+    <div class="chat-group-user clearfix" id="${id}">
+      <p class="chat-group-user__name">${name}</p>
+      <div class="user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn" data-user-id="${id}" data-user-name="${name}">削除</div>
     </div>`;
-    $(".ChatMembers").append(html);
+    $(".js-add-user").append(html);
+  }
+  function addMember(userId) {
+    let html = `<input value="${userId}" name="group[user_ids][]" type="hidden" id="group_user_ids_${userId}" />`;
+    $(`#${userId}`).append(html);
   }
   $("#user-search-field").on("keyup", function() {
     let input = $("#user-search-field").val();

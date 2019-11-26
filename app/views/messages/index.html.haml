@@ -15,8 +15,7 @@
       .right-header
         = link_to'Edit',edit_group_path(@group),class: "button" 
     .messages
-      .message
-
+      = render @messages
     .form
       = form_for [@group, @message], html: {class: "js-form"} do |f|
         = f.text_field :content, class: 'form__message', placeholder: 'type a message'
