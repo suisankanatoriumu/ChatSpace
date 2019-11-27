@@ -1,6 +1,6 @@
 $(function(){
   // 画面上の最新ID
-  var latest_id = 0;
+  var last_message_id = 0;
 
   function buildHTML(message){
     var MessageImage = ``
@@ -13,7 +13,7 @@ $(function(){
                         ${message.user_name}
                       </div>
                       <div class= upper-message__date>
-                        ${message.created_at}
+                        ${message.date}
                       </div>
                     </div>
                     <div class= lower-message>
@@ -26,38 +26,39 @@ $(function(){
     return html;
   }
 
-  function reloadMessages() {
+  function reload() {
     if (window.location.href.match(/\/groups\/\d+\/messages/)) {
       $.ajax({
-        url: location.href,
+        url: 'api/messages',
         type: "GET",
         dataType: 'json',
+        data: {id: last_message_id}
       })
-
       .done(function(new_messages){
-        console.log(new_messages)
+
         // 画面初期表示時のみ実行
-        if (latest_id == 0) {
-          latest_id = $('.message').last().data('messageId');
+        if (last_message_id == 0) {
+          last_message_id = $('.message').last().data('messageId');
         }
+
         var chatHTML = '';
         new_messages.forEach(function(message){
-          if (message.id > latest_id){
+          if (message.id > last_message_id){
             chatHTML += buildHTML(message);
           $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, "first");
 
           // 画面上の最新IDを更新
-          latest_id = message.id;
+          last_message_id = message.id;
           }
         });
       $('.messages').append(chatHTML);
       })
       .fail(function(new_messages){
-        console.log('メッセージ取得に失敗しました');
+        alert('メッセージ取得に失敗しました');
       });
     }
     else {
-      clearInterval(interval);
+      clearInterval(intarval);
     }
   }
   
@@ -84,5 +85,6 @@ $(function(){
      });
      return false;
   })
-  setInterval(reloadMessages, 7000);
+
+  setInterval(reload, 7000);
 })
